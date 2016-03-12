@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Rap Experience Generator</title>
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+<script src="js/Dictionary.js"></script>
+<script>
+	var intervalID = [];
+	var context = new AudioContext(),
+    masterVolume = context.createGain(),
+    oscillators = {};
+	masterVolume.gain.value = 0.1;
+	masterVolume.connect(context.destination);
+	var rap = createRap(10); 
+	console.log(rap);
+	
+	//returns a string rap, which consists of random words from the dictionary between raplike phrases
+	function createRap(length)
+	{
+		var rapwords = ["Yo","Give it to me","Gimme some","Thats what","Heya","What","Lets go","thats it","holla","bless","Sup"];
+		var j=0
+		var rap = "";
+		while(j<length)
+		{
+			rand = Math.floor((Math.random()*109560)+1);//there are lots of words in the dict array in the dist.js file
+			rap = rap + rapwords[Math.floor((Math.random()*rapwords.length))]+ ". " +dict[rand].word + ". "
+			j = j+1
+		}
+		return rap
+	}
+	
+	//Create a tone with a specified duration, freq, detune and type
+	//type is a number from 1-4
+	function createSound(duration, frequency, detune, type)
+	{
+		waveType = ['sine', 'square', 'sawtooth', 'triangle']
+		var osc = context.createOscillator();
+		osc.frequency.value = frequency;
+		osc.type = waveType[type-1];
+		osc.detune.value = detune;
+		osc.connect(masterVolume);
+		var startTime = context.currentTime
+		osc.start(startTime);
+		osc.stop(startTime+duration);
+	}
+//TTS reads the rap and plays the beat
+ function startRap() {
+	responsiveVoice.speak(rap, "UK English Male", {rate: 1});
+	intervalID.push(setInterval(function(){createSound(0.5, 65, 0,4)}, 1000))
+	intervalID.push(setInterval(function(){createSound(0.1, 100, 0,4)}, 400))
+	intervalID.push(setInterval(function(){createSound(0.1, 1000, 0,4)}, 2000))
+	console.log(intervalID[0])
+	console.log(intervalID.length)
+};
+
+//stop the beats
+function stopRap(intervalArray) {
+	for (i = 0; i < intervalArray.length; i++) { 
+		clearInterval(intervalArray[i])
+	}
+	responsiveVoice.cancel();
+	intervalArray = [];
+};
+		</script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Generated Rap Experience</h1>
+            <button id="play" onclick='startRap();'>Start</button>
+			<button id="play" onclick='stopRap(intervalID)'>Stop</button>
+        </div>
+
+    </body>
+</html>
