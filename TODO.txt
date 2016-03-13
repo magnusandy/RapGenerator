@@ -12,3 +12,4 @@ see words of the rap
 alter "rap" words
 
 look into custom type - setPeriodicWave()
+okay
