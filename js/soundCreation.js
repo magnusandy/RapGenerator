@@ -48,6 +48,7 @@ function createSound(duration, frequency, detune, type)
 
 //TTS reads the rap and plays the beat
 function startRap() {
+stopRap()
 rap = createRap(10);
 censorship();
 responsiveVoice.speak(rap, "UK English Male", {rate: 1});
@@ -58,11 +59,15 @@ playSound(100, 1000, 0,4, 2000)
 
 //stop the beats
 function stopRap(intervalArray) {
-for (i = 0; i < intervalArray.length; i++) { 
-	clearInterval(intervalArray[i])
-}
-responsiveVoice.cancel();
-intervalArray = [];
+	//stopRap() is called in startRap, and the first time it is called, the array wont be initialized yet. 
+	if(intervalArray.length != null)
+	{
+		for (i = 0; i < intervalArray.length; i++) { 
+			clearInterval(intervalArray[i])
+		}
+		responsiveVoice.cancel();
+		intervalArray = [];
+	}
 };
 
 //plays a tone with specificed freq, detuene, type and duration on a loop every so many miliseconds  specified by period
