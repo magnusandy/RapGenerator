@@ -1,11 +1,18 @@
-var intervalID = [];
+
+var intervalID = [];//create storage for the interval ID values so the tones can be stopped
 var context = new AudioContext();
 var masterVolume = context.createGain();
-masterVolume.gain.value = 0.1;
-masterVolume.connect(context.destination);
+masterVolume.gain.value = 0.2;
+masterVolume.connect(context.destination);//link the volume setting to the AudioContext
 
-var rap = createRap(10); 
-console.log(rap);
+var rap= ""
+
+//creates a safe and censored version of the rap that is displayed on the page
+function censorship()
+{
+    var censoredRap = rap.replace(/\./g,"")
+    document.getElementById("displayRap").innerHTML = censoredRap
+}
 
 //returns a string rap, which consists of random words from the dictionary between raplike phrases
 function createRap(length)
@@ -41,6 +48,8 @@ function createSound(duration, frequency, detune, type)
 
 //TTS reads the rap and plays the beat
 function startRap() {
+rap = createRap(10);
+censorship();
 responsiveVoice.speak(rap, "UK English Male", {rate: 1});
 playSound(500, 65, 0, 4, 1000)
 playSound(100, 100, 0,4, 400)

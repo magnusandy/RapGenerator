@@ -7,8 +7,8 @@ sounds
 	period
 	type
 	detune - looking into this, measured in cents, might just start with a value from -100 to 100
-see words of the rap
-	-without periods
+//see words of the rap
+//	-without periods
 alter "rap" words
 
 look into custom type - setPeriodicWave()
