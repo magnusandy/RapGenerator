@@ -17,7 +17,7 @@ function censorship()
 //returns a string rap, which consists of random words from the dictionary between raplike phrases
 function createRap(length)
 {
-	var rapwords = ["Yo","Give it to me","Gimme some","Thats what","Heya","What","Lets go","thats it","holla","bless","Sup"];
+	var rapwords = ["Yo","Give it to me","Gimme some","Thats what","Heya","What","Lets go","thats it","holla","Sup"];
 	var j=0
 	var rap = "";
 	while(j<length)
@@ -47,11 +47,11 @@ function createSound(duration, frequency, detune, type)
 }
 
 //TTS reads the rap and plays the beat
-function startRap() {
+function startRap(voice, speed) {
 stopRap(intervalID)//stop any currently running raps
 rap = createRap(10);
 censorship();
-responsiveVoice.speak(rap, "UK English Male", {rate: 1});
+responsiveVoice.speak(rap, voice, {rate: speed});
 playSound(500, 65, 0, 4, 1000)
 playSound(100, 100, 0,4, 400)
 playSound(100, 1000, 0,4, 2000)
