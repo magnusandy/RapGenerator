@@ -1,5 +1,5 @@
-change voice 
-speech rate
+//change voice 
+//speech rate
 change master volume
 sounds
 	freq
@@ -12,3 +12,6 @@ sounds
 alter "rap" words
 
 look into custom type - setPeriodicWave()
+
+BUG - with the recursive voice function, it is possible for the beat to stop before the rap finishes, because the beats check if the voice is speaking and then stops if its not, so its possible to catch between words 
+

@@ -4,8 +4,9 @@ var context = new AudioContext();
 var masterVolume = context.createGain();
 masterVolume.gain.value = 0.2;
 masterVolume.connect(context.destination);//link the volume setting to the AudioContext
-
 var rap= ""
+var isTTSgoing = false; //used by the startTTS function, and checked by the playSound function to see if there is a current TTS session going, so that the beat doesnt stop between words
+
 
 //creates a safe and censored version of the rap that is displayed on the page
 function censorship()
@@ -17,13 +18,15 @@ function censorship()
 //returns a string rap, which consists of random words from the dictionary between raplike phrases
 function createRap(length)
 {
-	var rapwords = ["Yo","Give it to me","Gimme some","Thats what","Heya","What","Lets go","thats it","holla","Sup", "player", "homeslice", "homeslizzle", "grunt" ];
+	var rapwords = ["yo","give it to me","gimme some","thats what","heya","what","lets go","thats it","holla","sup", "player", "homeslice", "homeslizzle" ];
 	var j=0
-	var rap = "";
+	var rap = [];
 	while(j<length)
 	{
 		rand = Math.floor((Math.random()*109560)+1);//there are lots of words in the dict array in the dist.js file
-		rap = rap + rapwords[Math.floor((Math.random()*rapwords.length))]+ ". " +dict[rand].word + ". "
+               
+        rap.push(rapwords[Math.floor((Math.random()*rapwords.length))])
+        rap.push(dict[rand].word) 
 		j = j+1
 	}
 	return rap
@@ -46,12 +49,33 @@ function createSound(duration, frequency, detune, type)
 	osc.stop(startTime+duration);
 }
 
+function startTTS(rapArray, voice, speed, recurseCounter)
+{
+    isTTSgoing = true //Speech has started and the beat shouldnt stop
+    if(recurseCounter < rapArray.length)//there is more words to say
+    {
+        var disp = document.getElementById("displayRap")
+        disp.innerHTML = disp.innerHTML + rapArray[recurseCounter] + " "
+        responsiveVoice.speak(rapArray[recurseCounter], voice, {rate: speed, onend: 
+            function(){
+                startTTS(rapArray, voice, speed, recurseCounter+1)          
+            }
+        });
+    }
+    else
+    {
+        isTTSgoing = false
+    }
+    //else there is nothing to say
+}
+
 //TTS reads the rap and plays the beat
 function startRap(voice, speed) {
 stopRap(intervalID)//stop any currently running raps
 rap = createRap(10);
-censorship();
-responsiveVoice.speak(rap, voice, {rate: speed});
+startTTS(rap, voice, speed, 0)
+//censorship();
+//responsiveVoice.speak(rap, voice, {rate: speed});
 playSound(500, 65, 0, 4, 1000)
 playSound(100, 100, 0,4, 400)
 //playSound(100, 1000, 0,4, 2000)
@@ -72,7 +96,7 @@ function stopRap(intervalArray) {
 function playSound(duration, frequency, detune, type, period)
 {	
 	intervalID.push(setInterval(function(){
-        if(responsiveVoice.isPlaying())
+        if(isTTSgoing == true)
         {
         createSound(duration, frequency, detune,type)
         }
