@@ -79,6 +79,16 @@ startTTS(rap, voice, speed, 0)
 playSound(500, 65, 0, 4, 1000)
 playSound(100, 100, 0,4, 400)
 //playSound(100, 1000, 0,4, 2000)
+    	intervalID.push(setInterval(function(){
+        if(isTTSgoing == true)
+        {
+        moveMouth()
+        }
+        else
+        {
+            stopRap(intervalID)
+        }
+    }, 400))
 };
 
 //stop the beats
@@ -106,3 +116,12 @@ function playSound(duration, frequency, detune, type, period)
         }
     }, period))
 }
+
+function moveMouth()
+{
+   var element = document.getElementById("mouth");
+   console.log(element.style.top)
+   element.style.top = 'calc(50% + 18px)';
+   window.setTimeout(function(){element.style.top = '50%'}, 200)
+   
+} 
