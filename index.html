@@ -7,6 +7,10 @@
 <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 <script src="js/Dictionary.js"></script>
 <script src="js/soundCreation.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="dist/jquery.hypher.js"></script>
+<script src="dist/browser/en-us.js"></script>
+<
 <script>
 function createCustomSound()
 {
@@ -28,6 +32,19 @@ function clickStart()
 }
 //stopRap(intervalID)
 
+//TAKES THE TEXT IN p.hyphenate and put hyphens between sylables
+function hyp()
+{
+
+    $('p.hyphenate').hyphenate('en-us');
+    var hypString = document.getElementById("hyp").innerHTML
+    console.log(hypString)
+    var result = hypString.replace(/[\u00AD\u002D\u2011]+/g,'-');
+    console.log(result)
+}
+
+//stopRap(intervalID)
+
 </script>
     </head>
     <body>
@@ -47,7 +64,7 @@ function clickStart()
 
             <img id="mouth" src="images/britishManFace-mouthOnly.png" style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
         </div>
-		
+		<p id="hyp" class="hyphenate"></p>
 		<!--
 		<div>
 			<h2>Create new tone</h2>
