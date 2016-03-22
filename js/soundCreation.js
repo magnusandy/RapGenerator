@@ -21,12 +21,15 @@ function createRap(length)
 	var rapwords = ["yo","give it to me","gimme some","thats what","heya","what","lets go","thats it","holla","sup", "player", "homeslice", "homeslizzle" ];
 	var j=0
 	var rap = [];
+    var rapString = ""
+    //First create a string of rap phrases and rando Words
 	while(j<length)
 	{
 		rand = Math.floor((Math.random()*109560)+1);//there are lots of words in the dict array in the dist.js file
-               
-        rap.push(rapwords[Math.floor((Math.random()*rapwords.length))])
-        rap.push(dict[rand].word) 
+        rapPhrase = rapwords[Math.floor((Math.random()*rapwords.length))]       
+        rapWord = dict[rand].word
+        rap.push(rapWord)
+        rap.push(rapPhrase)
 		j = j+1
 	}
 	return rap
@@ -79,16 +82,8 @@ startTTS(rap, voice, speed, 0)
 playSound(500, 65, 0, 4, 1000)
 playSound(100, 100, 0,4, 400)
 //playSound(100, 1000, 0,4, 2000)
-    	intervalID.push(setInterval(function(){
-        if(isTTSgoing == true)
-        {
-        moveMouth()
-        }
-        else
-        {
-            stopRap(intervalID)
-        }
-    }, 400))
+animateMouth()
+    	
 };
 
 //stop the beats
@@ -117,11 +112,31 @@ function playSound(duration, frequency, detune, type, period)
     }, period))
 }
 
-function moveMouth()
+function openThenCloseMouth(closeTime)
 {
    var element = document.getElementById("mouth");
    console.log(element.style.top)
    element.style.top = 'calc(50% + 18px)';
-   window.setTimeout(function(){element.style.top = '50%'}, 200)
+   window.setTimeout(function(){element.style.top = '50%'}, closeTime)
    
 } 
+//randomizes the mouth movement by a certian degree run on the same interval block as the sound beats
+function animateMouth()
+{
+
+    intervalID.push(setInterval(function(){
+        closeTime = Math.floor((Math.random()*200)+1)+100 //rand number between 300 and 400
+       
+        if(isTTSgoing == true)
+        {
+        openThenCloseMouth(closeTime)//open and close the mouth at speed between 50 and 100
+        }
+        else
+        {
+            stopRap(intervalID)
+        }
+    }, 400))
+
+}
+
+
