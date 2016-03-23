@@ -57,8 +57,8 @@ function startTTS(rapArray, voice, speed, recurseCounter)
     isTTSgoing = true //Speech has started and the beat shouldnt stop
     if(recurseCounter < rapArray.length)//there is more words to say
     {
-        var disp = document.getElementById("displayRap")
-        disp.innerHTML = disp.innerHTML + rapArray[recurseCounter] + " "
+        //var disp = document.getElementById("displayRap")
+        //disp.innerHTML = disp.innerHTML + rapArray[recurseCounter] + " "
         responsiveVoice.speak(rapArray[recurseCounter], voice, {rate: speed, onend: 
             function(){
                 startTTS(rapArray, voice, speed, recurseCounter+1)          
@@ -75,7 +75,8 @@ function startTTS(rapArray, voice, speed, recurseCounter)
 //TTS reads the rap and plays the beat
 function startRap(voice, speed) {
 stopRap(intervalID)//stop any currently running raps
-rap = createRap(10);
+rap = createRap(1000);
+console.log(rap)
 startTTS(rap, voice, speed, 0)
 //censorship();
 //responsiveVoice.speak(rap, voice, {rate: speed});
@@ -93,6 +94,7 @@ function stopRap(intervalArray) {
 			clearInterval(intervalArray[i])
 		}
 		responsiveVoice.cancel();
+		isTTSgoing = false;
 		intervalArray = [];
 	}
 };
@@ -115,7 +117,7 @@ function playSound(duration, frequency, detune, type, period)
 function openThenCloseMouth(closeTime)
 {
    var element = document.getElementById("mouth");
-   console.log(element.style.top)
+   //console.log(element.style.top)
    element.style.top = 'calc(50% + 18px)';
    window.setTimeout(function(){element.style.top = '50%'}, closeTime)
    

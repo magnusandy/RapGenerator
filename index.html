@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="dist/jquery.hypher.js"></script>
 <script src="dist/browser/en-us.js"></script>
-<
+
 <script>
 function createCustomSound()
 {
@@ -24,11 +24,10 @@ function createCustomSound()
 
 function clickStart()
 {
-	var voice = document.getElementById("voiceType").value;
-	var speed = parseInt(document.getElementById("voiceSpeed").value);
-	var speedDec = speed.toFixed(2)/10.00;//move the value to have 2 decimal places
-	console.log(speedDec);
-	startRap(voice, speedDec)
+	//var voice = document.getElementById("voiceType").value;
+	//var speed = parseInt(document.getElementById("voiceSpeed").value);
+	//var speedDec = speed.toFixed(2)/10.00;//move the value to have 2 decimal places
+	startRap("UK English Male", 0.9)
 }
 //stopRap(intervalID)
 
@@ -42,14 +41,25 @@ function hyp()
     var result = hypString.replace(/[\u00AD\u002D\u2011]+/g,'-');
     console.log(result)
 }
-
+//start or stop the rap depending on if its going already
+function onPressStartOrStop()
+{
+	if(isTTSgoing == true)
+        {
+        stopRap(intervalID);
+        }
+        else
+        {
+        clickStart();
+        }
+}
 //stopRap(intervalID)
 
 </script>
     </head>
     <body>
         <div class="container">
-            <h1>Generated Rap Experience</h1>
+            <!--<h1>Generated Rap Experience</h1>
             <p id="displayRap"></p>
             <button id="play" onclick='clickStart();'>Start</button>
 			<button id="play" onclick='stopRap(intervalID)'>Stop</button>
@@ -57,12 +67,12 @@ function hyp()
 			  <option value="UK English Male">Male</option>
 			  <option value="UK English Female">Female</option>
 			</select>
-			<p>Voice Speed: </p><input type="range" id="voiceSpeed" value="10" min='0' max='20'>
+			<p>Voice Speed: </p><input type="range" id="voiceSpeed" value="10" min='0' max='20'>-->
         </div>
         <div>
-            <img src="images/britishManFace-withoutMouth.png" style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
+            <img src="images/britishManFace-withoutMouth.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
 
-            <img id="mouth" src="images/britishManFace-mouthOnly.png" style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
+            <img id="mouth" src="images/britishManFace-mouthOnly.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
         </div>
 		<p id="hyp" class="hyphenate"></p>
 		<!--
