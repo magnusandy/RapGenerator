@@ -57,8 +57,15 @@ function startTTS(rapArray, voice, speed, recurseCounter)
     isTTSgoing = true //Speech has started and the beat shouldnt stop
     if(recurseCounter < rapArray.length)//there is more words to say
     {
-        //var disp = document.getElementById("displayRap")
-        //disp.innerHTML = disp.innerHTML + rapArray[recurseCounter] + " "
+        var disp = document.getElementById("display")
+        if(recurseCounter == 0)//Cant display the previous word cause there isnt one
+        {
+            disp.innerHTML=" <br/><b>"+rapArray[recurseCounter]+"</b><br/>"+rapArray[recurseCounter+1]
+        }
+        else
+        {
+            disp.innerHTML = rapArray[recurseCounter-1]+"<br/><b>"+rapArray[recurseCounter]+"</b><br/>"+rapArray[recurseCounter+1]
+        }
         responsiveVoice.speak(rapArray[recurseCounter], voice, {rate: speed, onend: 
             function(){
                 startTTS(rapArray, voice, speed, recurseCounter+1)          

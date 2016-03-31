@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="dist/jquery.hypher.js"></script>
 <script src="dist/browser/en-us.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
 
 <script>
 function createCustomSound()
@@ -69,8 +70,10 @@ function onPressStartOrStop()
 			</select>
 			<p>Voice Speed: </p><input type="range" id="voiceSpeed" value="10" min='0' max='20'>-->
         </div>
+<p id="display" style="text-align:center; position: absolute;top: calc(50% - 200px); left: 50%; height:100px; width:100px; margin-left: -50px; margin-top: -50px; font-size: 32px; font-family: 'Tangerine', cursive;"></p>
         <div>
-            <img src="images/britishManFace-withoutMouth.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
+            
+            <img id="face" src="images/britishManFace-withoutMouth.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
 
             <img id="mouth" src="images/britishManFace-mouthOnly.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
         </div>
