@@ -1,17 +1,3 @@
-//change voice 
-//speech rate
-change master volume
-sounds
-	freq
-	durateion
-	period
-	type
-	detune - looking into this, measured in cents, might just start with a value from -100 to 100
-//see words of the rap
-//	-without periods
-alter "rap" words
-
-look into custom type - setPeriodicWave()
-
-BUG - with the recursive voice function, it is possible for the beat to stop before the rap finishes, because the beats check if the voice is speaking and then stops if its not, so its possible to catch between words 
-
+fix that guys mouth, OCD killin me
+make the beat better
+have the rap continue where it left off when stop/started or at least complete the next word
