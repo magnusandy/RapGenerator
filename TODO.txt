@@ -1,3 +1,4 @@
 fix that guys mouth, OCD killin me
 make the beat better
 have the rap continue where it left off when stop/started or at least complete the next word
+clean up/ comment out some of the unused code like the hypenation stuff 
