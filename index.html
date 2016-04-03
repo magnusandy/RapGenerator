@@ -13,87 +13,16 @@
 <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
 
 <script>
-function createCustomSound()
-{
-	var freq = document.getElementById('frequency').value
-	var detune = document.getElementById('detune').value
-	var dur = document.getElementById('duration').value
-	var per = document.getElementById('period').value
-	var type = document.getElementById('type').value
-	playSound(dur, freq, detune, type, per)
-}
-
-function clickStart()
-{
-	//var voice = document.getElementById("voiceType").value;
-	//var speed = parseInt(document.getElementById("voiceSpeed").value);
-	//var speedDec = speed.toFixed(2)/10.00;//move the value to have 2 decimal places
-	startRap("UK English Male", 0.9)
-}
-//stopRap(intervalID)
-
-//TAKES THE TEXT IN p.hyphenate and put hyphens between sylables
-function hyp()
-{
-
-    $('p.hyphenate').hyphenate('en-us');
-    var hypString = document.getElementById("hyp").innerHTML
-    console.log(hypString)
-    var result = hypString.replace(/[\u00AD\u002D\u2011]+/g,'-');
-    console.log(result)
-}
-//start or stop the rap depending on if its going already
-function onPressStartOrStop()
-{
-	if(isTTSgoing == true)
-        {
-        stopRap(intervalID);
-        }
-        else
-        {
-        clickStart();
-        }
-}
-//stopRap(intervalID)
 
 </script>
     </head>
     <body>
         <div class="container">
-            <!--<h1>Generated Rap Experience</h1>
-            <p id="displayRap"></p>
-            <button id="play" onclick='clickStart();'>Start</button>
-			<button id="play" onclick='stopRap(intervalID)'>Stop</button>
-			<select id="voiceType">
-			  <option value="UK English Male">Male</option>
-			  <option value="UK English Female">Female</option>
-			</select>
-			<p>Voice Speed: </p><input type="range" id="voiceSpeed" value="10" min='0' max='20'>-->
         </div>
-<p id="display" style="text-align:center; position: absolute;top: calc(50% - 200px); left: 50%; height:100px; width:100px; margin-left: -50px; margin-top: -50px; font-size: 32px; font-family: 'Tangerine', cursive;"></p>
-        <div>
-            
-            <img id="face" src="images/britishManFace-withoutMouth.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
-
-            <img id="mouth" src="images/britishManFace-mouthOnly.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -90px; margin-top: -125px;">
+            <p id="display" style="text-align:center; position: absolute;top: calc(50% - 200px); left: 50%; height:100px; width:100px; margin-left: -50px; margin-top: -50px; font-size: 32px; font-family: 'Tangerine', cursive;"></p>
+        <div>    
+            <img id="face" src="images/britishManFace-withoutMouth.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -100px; margin-top: -150px;">
+            <img id="mouth" src="images/britishManFace-mouthOnly.png" onclick='onPressStartOrStop();' style="position: absolute; top: 50%; left: 50%; margin-left: -100px; margin-top: -150px;">
         </div>
-		<p id="hyp" class="hyphenate"></p>
-		<!--
-		<div>
-			<h2>Create new tone</h2>
-			<p>Freq: </p><input type="range" id="frequency" value="440" min='65' max='4000'>
-			<p>detune: </p><input type="range" id="detune" value="0" min='-100' max='100'>
-			<p>duration: </p><input type="number" id="duration">
-			<p>period: </p><input type="number" id="period">
-			<select id="type">
-			  <option value="1">sine</option>
-			  <option value="2">square</option>
-			  <option value="3">sawtooth</option>
-			  <option value="4">triangle</option>
-			</select>
-			<button id="createCustom" onclick='createCustomSound()'>Create</button>
-			
-		</div>
-		-->
     </body>
 </html>
